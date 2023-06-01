@@ -93,7 +93,13 @@ total_detox_entries
 
 
 ```{r}
-#Your code here 
+library(dplyr)
+
+mean_time_post_detox <- HELPmiss %>%
+  summarize(mean_time = mean(daysanysub))
+
+mean_time_post_detox
+
 
 ```
 
