@@ -35,7 +35,7 @@ data("HELPmiss", package = "mosaicData")
 
 *Write several sentences (or a bullet list) describing the HELP Study and the resulting `HELPmiss` data.  Your description should investigate basic data provenance (e.g., Who, What, When, Where, Why, How), explain the setting for the data, specify what each case represents in the data, and remark on inclusion/exclusion criteria.* 
 ```{r}
-cat("Inclusion and exclusion criteria for the `HELPmiss` dataset are not explicitly mentioned in the provided information. However, it can be assumed that the dataset includes individuals who met certain criteria related to age and participation in the HELP Study. The specifics of the inclusion/exclusion criteria can be further explored by referring to the research paper cited in the R help documentation for the dataset.\n")
+cat("In the details given, the inclusion and exclusion criteria for the 'HELPmiss' dataset are not made clear. But it is safe to believe that the dataset includes people who met certain age and HELP Study participation requirements. The research paper mentioned in the R help documentation for the dataset can be used to learn more about the exact inclusion and exclusion criteria.\n")
 
 cat("The resulting dataset from the HELP Study, called `HELPmiss`, contains information on a cohort of older adults who participated in the study. Each case in the dataset represents an individual participant in the study and includes variables related to demographics, medical history, physical and cognitive health, lifestyle factors, and other relevant measurements.\n\n")
 cat("Basic data provenance for the `HELPmiss` dataset:\n")
