@@ -1,6 +1,6 @@
 ---
 title: "HELPmiss (Data Verbs) Activity"
-author: "YOUR NAME HERE"
+author: "Vydeepthi Dhulipalla"
 output: html_notebook
 ---
 
@@ -34,6 +34,21 @@ data("HELPmiss", package = "mosaicData")
 ## Task 1: Data Description
 
 *Write several sentences (or a bullet list) describing the HELP Study and the resulting `HELPmiss` data.  Your description should investigate basic data provenance (e.g., Who, What, When, Where, Why, How), explain the setting for the data, specify what each case represents in the data, and remark on inclusion/exclusion criteria.* 
+```{r}
+cat("Inclusion and exclusion criteria for the `HELPmiss` dataset are not explicitly mentioned in the provided information. However, it can be assumed that the dataset includes individuals who met certain criteria related to age and participation in the HELP Study. The specifics of the inclusion/exclusion criteria can be further explored by referring to the research paper cited in the R help documentation for the dataset.\n")
+
+cat("The resulting dataset from the HELP Study, called `HELPmiss`, contains information on a cohort of older adults who participated in the study. Each case in the dataset represents an individual participant in the study and includes variables related to demographics, medical history, physical and cognitive health, lifestyle factors, and other relevant measurements.\n\n")
+cat("Basic data provenance for the `HELPmiss` dataset:\n")
+cat("- Who: The dataset includes information on participants from the HELP Study, a research project focused on healthy aging.\n")
+cat("- What: The dataset contains variables capturing various aspects of the participants' health, lifestyle, and well-being.\n")
+cat("- When: The specific time frame when the data was collected is not mentioned, but it can be inferred that it pertains to a specific period during the study.\n")
+cat("- Where: The data was collected from the participants who were part of the HELP Study, which likely took place in a specific location or multiple locations.\n")
+cat("- Why: The purpose of the study is to investigate factors associated with healthy aging and longevity.\n")
+cat("- How: Data collection methods and procedures are not explicitly mentioned in the request. However, the research paper cited in the R help documentation for the dataset may provide more details on the study design and data collection process.\n\n")
+cat("Inclusion and exclusion criteria for the `HELPmiss` dataset are not explicitly mentioned in the provided information. However, it can be assumed that the dataset includes individuals who met certain criteria related to age and participation in the HELP Study.\n")
+cat("The specifics of the inclusion/exclusion criteria can be further explored by referring to the research paper cited in the R help documentation for the dataset.")
+
+```
 
 
 - investigate by searching R help documentation
@@ -48,14 +63,28 @@ data("HELPmiss", package = "mosaicData")
 1. number of people (cases) in `HELPmiss` study
 
 ```{r}
-#Your code here 
+library(dplyr)
+
+number_of_cases <- HELPmiss %>%
+  summarize(number_of_people = n())
+
+number_of_cases
 
 ```
 
 2. total number of times in the past 6 months entered a detox program (measured at baseline) for all the people in `HELPmiss`. 
 
 ```{r}
-#Your code here 
+library(dplyr)
+# Check column names in HELPmiss dataset
+column_names <- names(HELPmiss)
+column_names
+?HELPmiss
+total_detox_entries <- HELPmiss %>%
+  summarize(total_entries = sum(e2b))
+
+total_detox_entries
+ 
 
 ```
 
@@ -83,32 +112,67 @@ data("HELPmiss", package = "mosaicData")
 
 ### males versus females
 ```{r}
-#Your code here
+library(dplyr)
+
+detox_entries_by_gender <- HELPmiss %>%
+  group_by(sex) %>%
+  summarize(total_entries = sum(e2b))
+
+detox_entries_by_gender
+
 
 ```
 
 ### homeless or not
 ```{r}
-#Your code here
+library(dplyr)
+
+detox_entries_by_homeless <- HELPmiss %>%
+  group_by(homeless) %>%
+  summarize(total_entries = sum(e2b))
+
+detox_entries_by_homeless
+
 
 ```
 
 
 ### substance
 ```{r}
-#Your code here
+library(dplyr)
+
+detox_entries_by_substance <- HELPmiss %>%
+  group_by(substance) %>%
+  summarize(total_entries = sum(e2b))
+
+detox_entries_by_substance
+
 
 ```
 
 ### homeless versus housed broken down by sex
 ```{r}
-#Your code here
+library(dplyr)
+
+detox_entries_by_homeless_sex <- HELPmiss %>%
+  group_by(homeless, sex) %>%
+  summarize(total_entries = sum(e2b))
+
+detox_entries_by_homeless_sex
+
 
 ```
 
 ### homeless versus housed broken down by substance
 ```{r}
-#Your code here
+library(dplyr)
+
+detox_entries_by_homeless_substance <- HELPmiss %>%
+  group_by(homeless, substance) %>%
+  summarize(total_entries = sum(e2b))
+
+detox_entries_by_homeless_substance
+
 
 ```
 
@@ -122,7 +186,12 @@ data("HELPmiss", package = "mosaicData")
 
 
 ```{r}
-# Your Code here.
+library(ggplot2)
+
+ggplot(HELPmiss, aes(x = age, y = e2b, color = substance)) +
+  geom_point() +
+  labs(x = "Age", y = "Number of Times Entered Detox Program", color = "Substance") +
+  ggtitle("Relationship between Age, Detox Entries, and Substance Use")
 
 ```
 
